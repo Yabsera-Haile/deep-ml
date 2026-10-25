@@ -15,7 +15,8 @@ def inverse_2x2(matrix) -> torch.Tensor | None:
 
     if det.item() == 0:
         return None
-    return torch.linalg.inv(m)
-    m[0,0],m[0,1],m[1,0],m[1,1]=m[1,1],-m[0,1],-m[1,0],m[0,0]
-    
-    return (m/det)
+    # return torch.linalg.inv(m)
+
+    a,b,c,d=m[1,1],-m[0,1],-m[1,0],m[0,0]
+    inv= torch.tensor([[a,b],[c,d]], dtype=torch.float, device=m.device)/det
+    return inv
