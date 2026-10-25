@@ -1,11 +1,11 @@
-import numpy as np
-def calculate_covariance_matrix(vectors: list[list[float]]) -> list[list[float]]:
-	# Your code here
-	n=len(vectors)
-	num_samples=len(vectors[0])
-	vectors=np.array(vectors)
-	mean=np.mean(vectors,axis=1)
-	mean_centered = vectors - mean[:,None]
-	cov = mean_centered @ mean_centered.T
-	return (cov/(num_samples-1)).tolist()
+import torch
 
+def calculate_covariance_matrix(vectors) -> torch.Tensor:
+    """
+    Calculate the covariance matrix for given feature vectors using PyTorch.
+    Input: 2D array-like of shape (n_features, n_observations).
+    Returns a tensor of shape (n_features, n_features).
+    """
+    v_t = torch.as_tensor(vectors, dtype=torch.float)
+    # Easie
+    return torch.cov(v_t)
